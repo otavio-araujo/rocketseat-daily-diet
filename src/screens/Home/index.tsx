@@ -10,6 +10,7 @@ export function Home() {
       <Statistics
         statisticsNumber="90.87"
         statisticsText="das refeições dentro da dieta"
+        statisticsIcon="arrow-up-right"
       />
     </Container>
   )
