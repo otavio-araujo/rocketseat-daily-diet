@@ -24,6 +24,7 @@ export const Container = styled(TouchableOpacity)<Props>`
       : theme.COLORS.GRAY_600};
 
   margin-top: 32px;
+  margin-bottom: 40px;
   height: 102px;
   padding: 20px 16px;
 

@@ -5,6 +5,7 @@ import { Header } from "@/components/Header"
 import { Statistics } from "@/components/Statistics"
 
 import { Container } from "./styles"
+import { TextMD } from "@/components/CustomText"
 
 export function Home() {
   const { COLORS } = useTheme()
@@ -17,6 +18,12 @@ export function Home() {
         type="PRIMARY"
         numberSize="XXL"
         icon={<ArrowUpRight color={COLORS.GREEN_DARK} size={24} />}
+      />
+      <TextMD
+        text="Refeições:"
+        size="MD"
+        color="GRAY_100"
+        fontWeight="REGULAR"
       />
     </Container>
   )
