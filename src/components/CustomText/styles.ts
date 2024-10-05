@@ -79,7 +79,7 @@ function getColors({ color = "GRAY_100" }: TextProps) {
   }
 }
 
-export const CustomText = styled(Text)<TextProps>`
+export const Txt = styled(Text)<TextProps>`
   ${({ theme, size, color, fontWeight }) => css`
     font-family: ${fontWeight === "BOLD"
       ? theme.FONT_FAMILY.BOLD

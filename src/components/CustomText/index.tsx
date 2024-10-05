@@ -1,4 +1,4 @@
-import { CustomText, TextSize, TextColor, TextWeight } from "./styles"
+import { Txt, TextSize, TextColor, TextWeight } from "./styles"
 
 import { TextInputProps } from "react-native"
 
@@ -9,7 +9,7 @@ type Props = TextInputProps & {
   fontWeight?: TextWeight
 }
 
-export function TextMD({
+export function CustomText({
   text,
   size = "MD",
   color = "GRAY_100",
@@ -17,8 +17,8 @@ export function TextMD({
   ...rest
 }: Props) {
   return (
-    <CustomText color={color} size={size} fontWeight={fontWeight} {...rest}>
+    <Txt color={color} size={size} fontWeight={fontWeight} {...rest}>
       {text}
-    </CustomText>
+    </Txt>
   )
 }

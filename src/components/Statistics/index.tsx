@@ -7,6 +7,7 @@ import {
   NumberSizeStyleProps,
   Text,
 } from "./styles"
+import { CustomText } from "@components/CustomText"
 
 type Props = {
   number: string
@@ -27,8 +28,8 @@ export function Statistics({
   return (
     <Container type={type} {...rest}>
       {icon && <IconContainer>{icon}</IconContainer>}
-      <Number size={numberSize}>{number}</Number>
-      <Text>{text}</Text>
+      <CustomText text={number} size="XXL" fontWeight="BOLD" color="GRAY_100" />
+      <CustomText text={text} size="SM" />
     </Container>
   )
 }
