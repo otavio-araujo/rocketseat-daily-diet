@@ -1,26 +1,31 @@
+import { ReactNode } from "react"
 import {
+  ButtonTypeStyleProps,
   Container,
-  StatisticsIcon,
-  StatisticsNumber,
-  StatisticsText,
+  IconContainer,
+  Number,
+  Text,
 } from "./styles"
 
 type Props = {
-  statisticsNumber: string
-  statisticsText: string
-  statisticsIcon?: string
+  number: string
+  text: string
+  type: ButtonTypeStyleProps
+  icon?: ReactNode
 }
 
 export function Statistics({
-  statisticsNumber,
-  statisticsText,
-  statisticsIcon = "arrow-up-right",
+  number,
+  text,
+  type = "DEFAULT",
+  icon = null,
+  ...rest
 }: Props) {
   return (
-    <Container>
-      <StatisticsIcon name={statisticsIcon} />
-      <StatisticsNumber>{statisticsNumber}%</StatisticsNumber>
-      <StatisticsText>{statisticsText}</StatisticsText>
+    <Container type={type} {...rest}>
+      {icon && <IconContainer>{icon}</IconContainer>}
+      <Number>{number}</Number>
+      <Text>{text}</Text>
     </Container>
   )
 }
