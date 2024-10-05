@@ -15,6 +15,7 @@ export function Home() {
         number="90.87%"
         text="das refeições dentro da dieta"
         type="PRIMARY"
+        numberSize="XXL"
         icon={<ArrowUpRight color={COLORS.GREEN_DARK} size={24} />}
       />
     </Container>
