@@ -10,13 +10,13 @@ export default {
     RED_MID: "#F3BABD",
     RED_LIGHT: "#F4E6E7",
 
-    GRAY_1: "#1B1D1E",
-    GRAY_2: "#333638",
-    GRAY_3: "#5C6265",
-    GRAY_4: "#B9BBBC",
-    GRAY_5: "#DDDEDF",
-    GRAY_6: "#EFF0F0",
-    GRAY_7: "#FAFAFA",
+    GRAY_100: "#1B1D1E",
+    GRAY_200: "#333638",
+    GRAY_300: "#5C6265",
+    GRAY_400: "#B9BBBC",
+    GRAY_500: "#DDDEDF",
+    GRAY_600: "#EFF0F0",
+    GRAY_700: "#FAFAFA",
   },
 
   FONT_FAMILY: {
@@ -24,7 +24,7 @@ export default {
     BOLD: "NunitoSans_700Bold",
   },
 
-  LINE_HEIGHT: "130%",
+  LINE_HEIGHT: 1.3,
 
   FONT_SIZE: {
     XS: 12,
