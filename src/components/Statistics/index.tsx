@@ -1,11 +1,21 @@
-import { Text } from "react-native"
-import { Container, StatisticsNumber, StatisticsText } from "./styles"
+import {
+  Container,
+  StatisticsIcon,
+  StatisticsNumber,
+  StatisticsText,
+} from "./styles"
 
-export function Statistics() {
+type Props = {
+  statisticsNumber: string
+  statisticsText: string
+}
+
+export function Statistics({ statisticsNumber, statisticsText }: Props) {
   return (
     <Container>
-      <StatisticsNumber>90,86%</StatisticsNumber>
-      <StatisticsText>das refeições dentro da dieta</StatisticsText>
+      <StatisticsIcon name="arrow-up-right" />
+      <StatisticsNumber>{statisticsNumber}%</StatisticsNumber>
+      <StatisticsText>{statisticsText}</StatisticsText>
     </Container>
   )
 }

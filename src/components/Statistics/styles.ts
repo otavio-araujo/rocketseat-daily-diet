@@ -1,5 +1,7 @@
 import styled, { css } from "styled-components/native"
 
+import Feather from "@expo/vector-icons/Feather"
+
 export const Container = styled.View`
   align-items: center;
   justify-content: center;
@@ -29,4 +31,13 @@ export const StatisticsText = styled.Text`
     color: ${theme.COLORS.GRAY_200};
   `}
   line-height: ${14 * 1.3}px;
+`
+
+export const StatisticsIcon = styled(Feather).attrs(({ theme }) => ({
+  size: 24,
+  color: theme.COLORS.GREEN_DARK,
+}))`
+  position: absolute;
+  top: 12px;
+  right: 12px;
 `
