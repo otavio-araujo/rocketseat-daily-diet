@@ -15,7 +15,7 @@ type Item = {
   hour: string
   date: string
   description: string
-  inDiet: boolean
+  onDiet: boolean
 }
 type Section = {
   title: string
@@ -33,7 +33,7 @@ export function Home() {
           id: "1",
           hour: "08:00",
           name: "X-Tudo",
-          inDiet: false,
+          onDiet: false,
           date: "04/05/2024",
           description: "Hambúrguer completo com extras",
         },
@@ -41,7 +41,7 @@ export function Home() {
           id: "2",
           hour: "12:00",
           name: "Lasanha",
-          inDiet: false,
+          onDiet: false,
           date: "04/05/2024",
           description: "Lasanha à bolonhesa com queijo",
         },
@@ -54,7 +54,7 @@ export function Home() {
           id: "1",
           hour: "08:00",
           name: "X-Tudo",
-          inDiet: false,
+          onDiet: false,
           date: "03/05/2024",
           description: "Hambúrguer completo com extras",
         },
@@ -62,7 +62,7 @@ export function Home() {
           id: "2",
           hour: "12:00",
           name: "Lasanha",
-          inDiet: false,
+          onDiet: false,
           date: "03/05/2024",
           description: "Lasanha à bolonhesa com queijo",
         },
@@ -70,7 +70,7 @@ export function Home() {
           id: "3",
           hour: "18:00",
           name: "Salada",
-          inDiet: true,
+          onDiet: true,
           date: "03/05/2024",
           description: "Salada verde com molho especial",
         },

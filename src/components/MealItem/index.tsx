@@ -8,17 +8,12 @@ import {
 import { StatusType } from "@/@types/theme"
 
 type Props = {
-  status: StatusType
+  onDiet: StatusType
   time: string
   mealName: string
 }
 
-export function MealItem({
-  time,
-  mealName,
-  status = "ON_DIET",
-  ...rest
-}: Props) {
+export function MealItem({ time, mealName, onDiet = true, ...rest }: Props) {
   return (
     <Container {...rest}>
       <InfoContainer>
@@ -26,7 +21,7 @@ export function MealItem({
         <InfoDivider />
         <CustomText text={mealName} size="MD" color="GRAY_200" />
       </InfoContainer>
-      <StatusContainer status={status} />
+      <StatusContainer onDiet={onDiet} />
     </Container>
   )
 }

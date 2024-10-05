@@ -4,8 +4,6 @@ type TextWeight = "REGULAR" | "BOLD"
 
 type ButtonType = "PRIMARY" | "SECONDARY"
 
-type StatusType = "ON_DIET" | "OFF_DIET"
-
 type TextColor =
   | "GREEN_DARK"
   | "GREEN_LIGHT"

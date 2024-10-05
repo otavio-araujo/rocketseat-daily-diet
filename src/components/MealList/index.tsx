@@ -15,7 +15,7 @@ export function MealList({ date }: Props) {
         size="LG"
         style={{ marginBottom: 8 }}
       />
-      <MealItem status="ON_DIET" time="08:00" mealName="Salada" />
+      <MealItem onDiet={true} time="08:00" mealName="Salada" />
     </Container>
   )
 }

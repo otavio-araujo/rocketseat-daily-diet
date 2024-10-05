@@ -1,9 +1,7 @@
 import styled from "styled-components/native"
 
-import { StatusType } from "@/@types/theme"
-
 type StatusProps = {
-  status: StatusType
+  onDiet: boolean
 }
 
 export const Container = styled.TouchableOpacity`
@@ -30,8 +28,8 @@ export const StatusContainer = styled.View<StatusProps>`
   width: 16px;
   height: 16px;
 
-  background-color: ${({ theme, status }) =>
-    status === "ON_DIET" ? theme.COLORS.GREEN_MID : theme.COLORS.RED_MID};
+  background-color: ${({ theme, onDiet }) =>
+    onDiet ? theme.COLORS.GREEN_MID : theme.COLORS.RED_MID};
   border-radius: 999px;
 `
 
