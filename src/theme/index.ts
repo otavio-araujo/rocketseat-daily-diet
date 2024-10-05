@@ -20,8 +20,8 @@ export default {
   },
 
   FONT_FAMILY: {
-    REGULAR: "Roboto_400Regular",
-    BOLD: "Roboto_700Bold",
+    REGULAR: "NunitoSans_400Regular",
+    BOLD: "NunitoSans_700Bold",
   },
 
   LINE_HEIGHT: "130%",
