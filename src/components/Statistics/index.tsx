@@ -3,9 +3,7 @@ import {
   ButtonTypeStyleProps,
   Container,
   IconContainer,
-  Number,
   NumberSizeStyleProps,
-  Text,
 } from "./styles"
 import { CustomText } from "@components/CustomText"
 

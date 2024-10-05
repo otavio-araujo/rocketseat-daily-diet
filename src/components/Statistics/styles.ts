@@ -30,28 +30,6 @@ export const Container = styled(TouchableOpacity)<Props>`
 
   border-radius: 8px;
 `
-
-export const Number = styled.Text<NumberProps>`
-  ${({ theme, size }) => css`
-    font-family: ${theme.FONT_FAMILY.BOLD};
-    color: ${theme.COLORS.GRAY_100};
-
-    font-size: ${theme.FONT_SIZE.XXL}px;
-    font-size: ${({ theme }) =>
-      size === "XXL" ? theme.FONT_SIZE.XXL + "px" : theme.FONT_SIZE.XL + "px"};
-  `}
-  line-height: ${32 * 1.3}px;
-`
-
-export const Text = styled.Text`
-  ${({ theme }) => css`
-    font-family: ${theme.FONT_FAMILY.REGULAR};
-    font-size: ${theme.FONT_SIZE.SM}px;
-    color: ${theme.COLORS.GRAY_200};
-  `}
-  line-height: ${14 * 1.3}px;
-`
-
 export const IconContainer = styled.View`
   position: absolute;
   top: 12px;
