@@ -7,19 +7,28 @@ import {
 } from "./styles"
 import { StatusType } from "@/@types/theme"
 
-type Props = {
-  onDiet: StatusType
+type MealItemProps = {
+  // id: string
+  meal: string
   time: string
-  mealName: string
+  date: string
+  // description: string
+  onDiet: boolean
 }
 
-export function MealItem({ time, mealName, onDiet = true, ...rest }: Props) {
+export function MealItem({
+  time,
+  onDiet = true,
+  meal,
+  date,
+  ...rest
+}: MealItemProps) {
   return (
     <Container {...rest}>
       <InfoContainer>
         <CustomText text={time} size="XS" color="GRAY_100" fontWeight="BOLD" />
         <InfoDivider />
-        <CustomText text={mealName} size="MD" color="GRAY_200" />
+        <CustomText text={meal} size="MD" color="GRAY_200" />
       </InfoContainer>
       <StatusContainer onDiet={onDiet} />
     </Container>

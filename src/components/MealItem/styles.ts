@@ -16,6 +16,7 @@ export const Container = styled.TouchableOpacity`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 12px;
 `
 
 export const InfoContainer = styled.View`
