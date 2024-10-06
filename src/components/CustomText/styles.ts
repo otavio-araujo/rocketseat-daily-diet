@@ -18,7 +18,7 @@ export const Txt = styled(Text)<TextProps>`
       : theme.FONT_FAMILY.REGULAR};
     font-size: ${getFontSize({ size })}px;
     color: ${getColors({ color })};
-    /* line-height: ${getFontSize({ size }) * theme.LINE_HEIGHT}px; */
   `}
   align-items: center;
+  text-align: center;
 `

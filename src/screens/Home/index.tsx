@@ -77,13 +77,14 @@ export function Home() {
         type="PRIMARY"
         numberSize="XXL"
         icon={<ArrowUpRight color={COLORS.GREEN_DARK} size={24} />}
+        style={{ marginTop: 32 }}
       />
       <CustomText
         text="Refeições:"
         size="MD"
         color="GRAY_100"
         fontWeight="REGULAR"
-        style={{ marginBottom: 8 }}
+        style={{ marginBottom: 8, marginTop: 40 }}
       />
 
       <Button

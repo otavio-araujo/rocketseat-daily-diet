@@ -1,4 +1,4 @@
-import { TouchableOpacity, TouchableOpacityProps } from "react-native"
+import { TouchableOpacity } from "react-native"
 import styled, { css } from "styled-components/native"
 
 export type ButtonTypeStyleProps = "PRIMARY" | "SECONDARY" | "DEFAULT"
@@ -12,7 +12,7 @@ type NumberProps = {
   size: NumberSizeStyleProps
 }
 
-export const Container = styled.TouchableOpacity<Props>`
+export const Container = styled(TouchableOpacity)<Props>`
   align-items: center;
   justify-content: center;
 
@@ -31,7 +31,7 @@ export const Container = styled.TouchableOpacity<Props>`
 export const IconContainer = styled.View`
   position: absolute;
   top: 12px;
-  right: 12px;
+  left: 12px;
 
   align-items: center;
   justify-content: center;

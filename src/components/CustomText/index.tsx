@@ -1,4 +1,5 @@
-import { Txt, TextSize, TextColor, TextWeight } from "./styles"
+import { TextColor, TextSize, TextWeight } from "@/@types/theme"
+import { Txt } from "./styles"
 
 import { TextInputProps } from "react-native"
 

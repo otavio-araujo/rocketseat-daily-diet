@@ -6,9 +6,8 @@ import {
   NumberSizeStyleProps,
 } from "./styles"
 import { CustomText } from "@components/CustomText"
-import { TouchableOpacityProps } from "react-native"
 
-type Props = TouchableOpacityProps & {
+type Props = {
   number: string
   text: string
   type: ButtonTypeStyleProps
@@ -16,7 +15,7 @@ type Props = TouchableOpacityProps & {
   icon?: ReactNode
 }
 
-export function Statistics({
+export function HeaderStatistics({
   number,
   text,
   type = "DEFAULT",

@@ -8,7 +8,7 @@ import { ThemeProvider } from "styled-components/native"
 
 import theme from "@/theme"
 import { Loading } from "@/components/Loading"
-import { Home } from "@/screens/Home"
+import { DietStatuses } from "@/screens/DietStatuses"
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -24,7 +24,7 @@ export default function App() {
         translucent
       />
 
-      {fontsLoaded ? <Home /> : <Loading />}
+      {fontsLoaded ? <DietStatuses /> : <Loading />}
     </ThemeProvider>
   )
 }
