@@ -1,13 +1,13 @@
 import { CustomText } from "@/components/CustomText"
 
-import { Item } from "@/@types/sectionLIst"
-
 import {
   Container,
   InfoContainer,
   InfoDivider,
   StatusContainer,
 } from "./styles"
+
+import { Item } from "@/@types/sectionList"
 
 type MealItemProps = Item
 

@@ -8,7 +8,7 @@ import { MealItem } from "@/components/MealItem"
 import { Statistics } from "@/components/Statistics"
 import { CustomText } from "@/components/CustomText"
 
-import { Section } from "@/@types/sectionLIst"
+import { Section } from "@/@types/sectionList"
 
 import { Container } from "./styles"
 
