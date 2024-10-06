@@ -1,20 +1,15 @@
 import { CustomText } from "@/components/CustomText"
+
+import { Item } from "@/@types/sectionLIst"
+
 import {
   Container,
   InfoContainer,
   InfoDivider,
   StatusContainer,
 } from "./styles"
-import { StatusType } from "@/@types/theme"
 
-type MealItemProps = {
-  // id: string
-  meal: string
-  time: string
-  date: string
-  // description: string
-  onDiet: boolean
-}
+type MealItemProps = Item
 
 export function MealItem({
   time,

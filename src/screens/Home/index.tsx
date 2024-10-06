@@ -1,42 +1,30 @@
+import { SectionList } from "react-native"
 import { useTheme } from "styled-components/native"
 import { ArrowUpRight, Plus } from "phosphor-react-native"
 
 import { Header } from "@/components/Header"
+import { Button } from "@/components/Button"
+import { MealItem } from "@/components/MealItem"
 import { Statistics } from "@/components/Statistics"
+import { CustomText } from "@/components/CustomText"
+
+import { Section } from "@/@types/sectionLIst"
 
 import { Container } from "./styles"
-import { CustomText } from "@/components/CustomText"
-import { Button } from "@/components/Button"
-import { MealList } from "@/components/MealList"
-import { SectionList, Text, View } from "react-native"
-import { MealItem } from "@/components/MealItem"
-
-type Item = {
-  id: string
-  meal: string
-  time: string
-  date: string
-  description: string
-  onDiet: boolean
-}
-type Section = {
-  title: string
-  data: Item[]
-}
 
 export function Home() {
   const { COLORS } = useTheme()
 
   const sections: Section[] = [
     {
-      title: "04/05/2024",
+      title: "04.05.24",
       data: [
         {
           id: "1",
           time: "08:00",
           meal: "X-Tudo",
           onDiet: false,
-          date: "04/05/2024",
+          date: "04.05.24",
           description: "Hambúrguer completo com extras",
         },
         {
@@ -44,20 +32,20 @@ export function Home() {
           time: "12:00",
           meal: "Lasanha",
           onDiet: false,
-          date: "04/05/2024",
+          date: "04.05.24",
           description: "Lasanha à bolonhesa com queijo",
         },
       ],
     },
     {
-      title: "03/05/2024",
+      title: "03.05.24",
       data: [
         {
           id: "1",
           time: "08:00",
           meal: "X-Tudo",
           onDiet: false,
-          date: "03/05/2024",
+          date: "03.05.24",
           description: "Hambúrguer completo com extras",
         },
         {
@@ -65,7 +53,7 @@ export function Home() {
           time: "12:00",
           meal: "Lasanha",
           onDiet: false,
-          date: "03/05/2024",
+          date: "03.05.24",
           description: "Lasanha à bolonhesa com queijo",
         },
         {
@@ -73,7 +61,7 @@ export function Home() {
           time: "18:00",
           meal: "Salada",
           onDiet: true,
-          date: "03/05/2024",
+          date: "03.05.24",
           description: "Salada verde com molho especial",
         },
       ],
