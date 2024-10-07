@@ -7,11 +7,26 @@ import { Pill } from "@/components/Pill"
 import { View } from "react-native"
 import { useState } from "react"
 import { Button } from "@/components/Button"
+import { CustomAlert } from "@/components/CustomAlert"
 
 export function MealDetails() {
   const { COLORS } = useTheme()
 
   const [isOnDiet, setIsOnDiet] = useState(false)
+  const [showAlert, setAlertVisible] = useState(false)
+
+  const handleConfirm = async () => {
+    setAlertVisible(false)
+  }
+
+  const handleCancel = () => {
+    // Handle the cancel action
+    setAlertVisible(false)
+  }
+
+  function handleDelete() {
+    setAlertVisible(true)
+  }
 
   return (
     <Container type="PRIMARY">
@@ -51,12 +66,20 @@ export function MealDetails() {
         />
 
         <Button
-          text="Editar refeição"
+          text="Excluir refeição"
           type="SECONDARY"
           icon={<Trash size={18} color={COLORS.GRAY_100} />}
           style={{ marginTop: 8 }}
+          onPress={handleDelete}
         />
       </Content>
+      <CustomAlert
+        visible={showAlert}
+        title="Excluir refeição"
+        onCancel={handleCancel}
+        onConfirm={handleConfirm}
+        message="Essa ação não pode ser desfeita"
+      />
     </Container>
   )
 }
