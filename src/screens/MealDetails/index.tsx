@@ -75,10 +75,9 @@ export function MealDetails() {
       </Content>
       <CustomAlert
         visible={showAlert}
-        title="Excluir refeição"
         onCancel={handleCancel}
         onConfirm={handleConfirm}
-        message="Essa ação não pode ser desfeita"
+        message="Deseja realmente excluir o registro da refeição?"
       />
     </Container>
   )

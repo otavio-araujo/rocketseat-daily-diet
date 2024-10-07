@@ -8,7 +8,6 @@ import { ButtonContaier, ModalCard, ModalContainer } from "./styles"
 
 interface CustomAlertProps {
   visible: boolean
-  title: string
   message: string
   onCancel: () => void
   onConfirm: () => void
@@ -16,7 +15,6 @@ interface CustomAlertProps {
 
 export function CustomAlert({
   visible,
-  title,
   message,
   onCancel,
   onConfirm,
@@ -32,7 +30,7 @@ export function CustomAlert({
       <ModalContainer>
         <ModalCard>
           <CustomText
-            text="Deseja realmente excluir o registro da refeição?"
+            text={message}
             color="GRAY_100"
             size="LG"
             fontWeight="BOLD"
