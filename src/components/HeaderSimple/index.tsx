@@ -3,8 +3,9 @@ import { ReactNode } from "react"
 import { CustomText } from "@components/CustomText"
 
 import { Container, IconContainer } from "./styles"
+import { TouchableOpacityProps } from "react-native"
 
-type Props = {
+type Props = TouchableOpacityProps & {
   title: string
   icon?: ReactNode
 }

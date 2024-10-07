@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { View } from "react-native"
 import { useTheme } from "styled-components/native"
+import { useNavigation } from "@react-navigation/native"
 import { ArrowLeft, PencilSimpleLine, Trash } from "phosphor-react-native"
 
 import { Pill } from "@/components/Pill"
@@ -12,6 +13,7 @@ import { HeaderSimple } from "@/components/HeaderSimple"
 import { Container, Content, HeaderContainer } from "./styles"
 
 export function MealDetails() {
+  const navigation = useNavigation()
   const { COLORS } = useTheme()
 
   const [isOnDiet, setIsOnDiet] = useState(false)
@@ -19,6 +21,7 @@ export function MealDetails() {
 
   const handleConfirm = async () => {
     setAlertVisible(false)
+    navigation.navigate("home")
   }
 
   const handleCancel = () => {
@@ -30,12 +33,17 @@ export function MealDetails() {
     setAlertVisible(true)
   }
 
+  function handleGoToEditMeal() {
+    navigation.navigate("mealCreate", { isEditing: true })
+  }
+
   return (
     <Container type="PRIMARY">
       <HeaderContainer>
         <HeaderSimple
           title="Refeição"
           icon={<ArrowLeft size={24} color={COLORS.GREEN_DARK} />}
+          onPress={() => navigation.navigate("home")}
         />
       </HeaderContainer>
       <Content>
@@ -65,6 +73,7 @@ export function MealDetails() {
           text="Editar refeição"
           icon={<PencilSimpleLine size={18} color={COLORS.WHITE} />}
           style={{ marginTop: "auto" }}
+          onPress={handleGoToEditMeal}
         />
 
         <Button

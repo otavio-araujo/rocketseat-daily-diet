@@ -2,6 +2,7 @@ import { useState } from "react"
 import { View } from "react-native"
 import { ArrowLeft } from "phosphor-react-native"
 import { useTheme } from "styled-components/native"
+import { useNavigation } from "@react-navigation/native"
 
 import { CustomText } from "@/components/CustomText"
 import { Statistics } from "@/components/Statistics"
@@ -10,6 +11,7 @@ import { HeaderStatistics } from "@/components/HeaderStatistics"
 import { Container, Content, HeaderContainer } from "./styles"
 
 export function DietStatuses() {
+  const navigation = useNavigation()
   const { COLORS } = useTheme()
   const [isOnDiet, setIsOnDiet] = useState(true)
 
@@ -17,6 +19,7 @@ export function DietStatuses() {
     <Container isOnDiet={isOnDiet}>
       <HeaderContainer>
         <HeaderStatistics
+          onPress={() => navigation.navigate("home")}
           number="90.86%"
           text="das refeições dentro da dieta"
           type={isOnDiet ? "PRIMARY" : "SECONDARY"}

@@ -1,4 +1,5 @@
 import styled, { css } from "styled-components/native"
+import { SafeAreaView } from "react-native-safe-area-context"
 
 type HeaderColor = "PRIMARY" | "SECONDARY" | "DEFAULT"
 
@@ -6,7 +7,7 @@ type StatusesProps = {
   type: HeaderColor
 }
 
-export const Container = styled.View<StatusesProps>`
+export const Container = styled(SafeAreaView)<StatusesProps>`
   flex: 1;
 
   background-color: ${({ theme, type }) =>
@@ -25,9 +26,7 @@ export const Content = styled.View`
   flex: 1;
 
   width: 100%;
-  padding-top: 40px;
-  padding-left: 24px;
-  padding-right: 24px;
+  padding: 40px 24px;
 
   background-color: ${({ theme }) => theme.COLORS.WHITE};
   border-radius: 20px 20px 0 0;

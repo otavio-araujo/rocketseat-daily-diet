@@ -1,6 +1,7 @@
 import { SectionList } from "react-native"
 import { useTheme } from "styled-components/native"
 import { ArrowUpRight, Plus } from "phosphor-react-native"
+import { useNavigation } from "@react-navigation/native"
 
 import { Section } from "@/@types/sectionList"
 
@@ -13,6 +14,8 @@ import { CustomText } from "@/components/CustomText"
 import { Container } from "./styles"
 
 export function Home() {
+  const navigation = useNavigation()
+
   const { COLORS } = useTheme()
 
   const sections: Section[] = [
@@ -68,6 +71,18 @@ export function Home() {
     },
   ]
 
+  function handleDietStatuses() {
+    navigation.navigate("dietStatuses")
+  }
+
+  function handleNewMeal() {
+    navigation.navigate("mealCreate", { isEditing: false })
+  }
+
+  function handleGoToMealDetails() {
+    navigation.navigate("mealDetails")
+  }
+
   return (
     <Container>
       <Header />
@@ -78,6 +93,7 @@ export function Home() {
         numberSize="XXL"
         icon={<ArrowUpRight color={COLORS.GREEN_DARK} size={24} />}
         style={{ marginTop: 32 }}
+        onPress={handleDietStatuses}
       />
       <CustomText
         text="Refeições"
@@ -91,6 +107,8 @@ export function Home() {
         text="Nova refeição"
         icon={<Plus color={COLORS.WHITE} size={18} />}
         type="PRIMARY"
+        onPress={handleNewMeal}
+        style={{ marginBottom: 32 }}
       />
 
       <SectionList
@@ -102,6 +120,7 @@ export function Home() {
             date={item.date}
             meal={item.meal}
             onDiet={item.onDiet}
+            onPress={handleGoToMealDetails}
           />
         )}
         renderSectionHeader={({ section: { title } }) => (

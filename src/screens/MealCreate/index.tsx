@@ -4,6 +4,7 @@ import { ptBR } from "date-fns/locale"
 import { Text, View } from "react-native"
 import { ArrowLeft } from "phosphor-react-native"
 import { useTheme } from "styled-components/native"
+import { useNavigation, useRoute } from "@react-navigation/native"
 
 import { CustomText } from "@/components/CustomText"
 import { HeaderSimple } from "@/components/HeaderSimple"
@@ -19,8 +20,18 @@ import {
   HeaderContainer,
   ToggleContainer,
 } from "./styles"
+import { Button } from "@/components/Button"
+
+type RouteParams = {
+  isEditing: boolean
+}
 
 export function MealCreate() {
+  const navigation = useNavigation()
+  const route = useRoute()
+
+  const { isEditing } = route.params as RouteParams
+
   const { COLORS } = useTheme()
 
   const [isOnDiet, setIsOnDiet] = useState<boolean | null>(null)
@@ -38,12 +49,17 @@ export function MealCreate() {
     setSelectedTime(newTime)
   }
 
+  function handleCreateMeal() {
+    navigation.navigate("mealFeedBack")
+  }
+
   return (
-    <Container type="PRIMARY">
+    <Container type="DEFAULT">
       <HeaderContainer>
         <HeaderSimple
-          title="Criar refeição"
-          icon={<ArrowLeft size={24} color={COLORS.GREEN_DARK} />}
+          title={isEditing ? "Editar refeição" : "Nova refeição"}
+          icon={<ArrowLeft size={24} color={COLORS.GRAY_100} />}
+          onPress={() => navigation.navigate("home")}
         />
       </HeaderContainer>
 
@@ -91,6 +107,11 @@ export function MealCreate() {
             </ToggleContainer>
           </View>
         </FormContainer>
+        <Button
+          text={isEditing ? "Salvar alterações" : "Criar refeição"}
+          style={{ marginTop: "auto" }}
+          onPress={handleCreateMeal}
+        />
       </Content>
     </Container>
   )
