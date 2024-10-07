@@ -1,13 +1,13 @@
+import { useState } from "react"
+import { View } from "react-native"
 import { ArrowLeft } from "phosphor-react-native"
 import { useTheme } from "styled-components/native"
 
-import { Container, Content, HeaderContainer } from "./styles"
-import { useState } from "react"
-
-import { HeaderStatistics } from "@/components/HeaderStatistics"
 import { CustomText } from "@/components/CustomText"
 import { Statistics } from "@/components/Statistics"
-import { View } from "react-native"
+import { HeaderStatistics } from "@/components/HeaderStatistics"
+
+import { Container, Content, HeaderContainer } from "./styles"
 
 export function DietStatuses() {
   const { COLORS } = useTheme()

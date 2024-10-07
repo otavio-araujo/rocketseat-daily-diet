@@ -1,4 +1,4 @@
-import styled from "styled-components/native"
+import styled, { css } from "styled-components/native"
 import { TouchableOpacity } from "react-native"
 
 import { ButtonType } from "@/@types/theme"
@@ -8,16 +8,17 @@ type Props = {
 }
 
 export const Container = styled(TouchableOpacity)<Props>`
+  ${({ theme, type }) => css`
+    border-color: ${theme.COLORS.GRAY_200};
+    background-color: ${type === "PRIMARY"
+      ? theme.COLORS.GRAY_200
+      : theme.COLORS.GRAY_700};
+    border-width: ${type === "SECONDARY" ? "1px" : "0px"};
+    border-color: ${type === "SECONDARY" ? theme.COLORS.GRAY_100 : "none"};
+  `}
   width: 100%;
 
   padding: 24px 16px;
-
-  background-color: ${({ theme, type }) =>
-    type === "PRIMARY" ? theme.COLORS.GRAY_200 : theme.COLORS.GRAY_700};
-
-  border-width: ${({ type }) => (type === "SECONDARY" ? "1px" : "0px")};
-  border-color: ${({ theme, type }) =>
-    type === "SECONDARY" ? theme.COLORS.GRAY_100 : "none"};
 
   flex-direction: row;
   align-items: center;

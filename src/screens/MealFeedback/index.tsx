@@ -1,8 +1,9 @@
+import { Image } from "react-native"
 import React, { useState } from "react"
+
 import { CustomText } from "@/components/CustomText"
 
 import { BoldText, Container, Text } from "./styles"
-import { Image } from "react-native"
 
 export function MealFeedback() {
   const [isOnDiet, setIsOnDiet] = useState(true)

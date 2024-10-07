@@ -2,13 +2,13 @@ import { SectionList } from "react-native"
 import { useTheme } from "styled-components/native"
 import { ArrowUpRight, Plus } from "phosphor-react-native"
 
+import { Section } from "@/@types/sectionList"
+
 import { Header } from "@/components/Header"
 import { Button } from "@/components/Button"
 import { MealItem } from "@/components/MealItem"
 import { Statistics } from "@/components/Statistics"
 import { CustomText } from "@/components/CustomText"
-
-import { Section } from "@/@types/sectionList"
 
 import { Container } from "./styles"
 

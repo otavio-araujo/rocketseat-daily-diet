@@ -1,13 +1,15 @@
-import { HeaderSimple } from "@/components/HeaderSimple"
-import { Container, Content, HeaderContainer } from "./styles"
-import { ArrowLeft, PencilSimpleLine, Trash } from "phosphor-react-native"
-import { useTheme } from "styled-components/native"
-import { CustomText } from "@/components/CustomText"
-import { Pill } from "@/components/Pill"
-import { View } from "react-native"
 import { useState } from "react"
+import { View } from "react-native"
+import { useTheme } from "styled-components/native"
+import { ArrowLeft, PencilSimpleLine, Trash } from "phosphor-react-native"
+
+import { Pill } from "@/components/Pill"
 import { Button } from "@/components/Button"
+import { CustomText } from "@/components/CustomText"
 import { CustomAlert } from "@/components/CustomAlert"
+import { HeaderSimple } from "@/components/HeaderSimple"
+
+import { Container, Content, HeaderContainer } from "./styles"
 
 export function MealDetails() {
   const { COLORS } = useTheme()
