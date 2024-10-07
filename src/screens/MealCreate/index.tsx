@@ -1,11 +1,15 @@
 import { useState } from "react"
-import { View } from "react-native"
+import { Text, View } from "react-native"
 import { ArrowLeft } from "phosphor-react-native"
 import { useTheme } from "styled-components/native"
-import RNDateTimePicker from "@react-native-community/datetimepicker"
+import { format } from "date-fns"
+import { ptBR } from "date-fns/locale"
 
 import { CustomText } from "@/components/CustomText"
 import { HeaderSimple } from "@/components/HeaderSimple"
+import { InputText } from "@/components/Forms/InputText"
+import { ToggleButton } from "@/components/ToggleButton"
+import { DateTimePicker } from "@/components/DateTimePicker"
 
 import {
   Container,
@@ -15,12 +19,24 @@ import {
   HeaderContainer,
   ToggleContainer,
 } from "./styles"
-import { InputText } from "@/components/Forms/InputText"
-import { ToggleButton } from "@/components/ToggleButton"
 
 export function MealCreate() {
   const { COLORS } = useTheme()
+
   const [isOnDiet, setIsOnDiet] = useState<boolean | null>(null)
+  const [selectedDate, setSelectedDate] = useState(new Date())
+  const [selectedTime, setSelectedTime] = useState(new Date())
+
+  const formattedDate = format(selectedDate, "dd/MM/yyyy", { locale: ptBR })
+  const formattedTime = format(selectedTime, "HH:mm", { locale: ptBR })
+
+  const handleDateChange = (newDate: Date) => {
+    setSelectedDate(newDate)
+  }
+
+  const handleTimeChange = (newTime: Date) => {
+    setSelectedTime(newTime)
+  }
 
   return (
     <Container type="PRIMARY">
@@ -37,12 +53,18 @@ export function MealCreate() {
           <InputText isTextArea multiline numberOfLines={4} label="Descrição" />
 
           <DateContainer>
-            <View style={{ flex: 1 }}>
-              <InputText label="Data" />
-            </View>
-            <View style={{ flex: 1 }}>
-              <InputText label="Hora" />
-            </View>
+            <DateTimePicker
+              pickerType="date"
+              label="Data"
+              date={selectedDate}
+              onDateChange={handleDateChange}
+            />
+            <DateTimePicker
+              pickerType="time"
+              label="Hora"
+              date={selectedTime}
+              onDateChange={handleTimeChange}
+            />
           </DateContainer>
 
           <View>
@@ -68,7 +90,6 @@ export function MealCreate() {
               />
             </ToggleContainer>
           </View>
-          <RNDateTimePicker value={new Date()} />
         </FormContainer>
       </Content>
     </Container>
