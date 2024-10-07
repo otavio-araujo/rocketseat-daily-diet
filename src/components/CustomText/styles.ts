@@ -20,5 +20,4 @@ export const Txt = styled(Text)<TextProps>`
     color: ${getColors({ color })};
   `}
   align-items: center;
-  text-align: center;
 `

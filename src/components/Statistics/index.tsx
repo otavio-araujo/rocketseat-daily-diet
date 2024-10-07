@@ -33,7 +33,7 @@ export function Statistics({
         fontWeight="BOLD"
         color="GRAY_100"
       />
-      <CustomText text={text} size="SM" />
+      <CustomText text={text} size="SM" style={{ textAlign: "center" }} />
     </Container>
   )
 }

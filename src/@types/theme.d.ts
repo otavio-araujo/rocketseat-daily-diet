@@ -2,7 +2,7 @@ type TextSize = "XS" | "SM" | "MD" | "LG" | "XL" | "XXL"
 
 type TextWeight = "REGULAR" | "BOLD"
 
-type ButtonType = "PRIMARY" | "SECONDARY"
+type ButtonType = "PRIMARY" | "SECONDARY" | "DEFAULT"
 
 type TextColor =
   | "GREEN_DARK"

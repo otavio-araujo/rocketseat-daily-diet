@@ -80,7 +80,7 @@ export function Home() {
         style={{ marginTop: 32 }}
       />
       <CustomText
-        text="Refeições:"
+        text="Refeições"
         size="MD"
         color="GRAY_100"
         fontWeight="REGULAR"
