@@ -11,7 +11,7 @@ import { Button } from "@/components/Button"
 export function MealDetails() {
   const { COLORS } = useTheme()
 
-  const [isOnDiet, setIsOnDiet] = useState(true)
+  const [isOnDiet, setIsOnDiet] = useState(false)
 
   return (
     <Container type="PRIMARY">
@@ -41,7 +41,7 @@ export function MealDetails() {
         />
         <Pill
           isOnDiet={isOnDiet}
-          text="dentro da dieta"
+          text={isOnDiet ? "dentro da dieta" : "fora da dieta"}
           style={{ marginRight: "auto", marginTop: 24 }}
         />
         <Button
