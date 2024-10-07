@@ -1,7 +1,8 @@
 import { useState } from "react"
+import { View } from "react-native"
 import { ArrowLeft } from "phosphor-react-native"
 import { useTheme } from "styled-components/native"
-import { Text, TouchableOpacity, View } from "react-native"
+import RNDateTimePicker from "@react-native-community/datetimepicker"
 
 import { CustomText } from "@/components/CustomText"
 import { HeaderSimple } from "@/components/HeaderSimple"
@@ -67,6 +68,7 @@ export function MealCreate() {
               />
             </ToggleContainer>
           </View>
+          <RNDateTimePicker value={new Date()} />
         </FormContainer>
       </Content>
     </Container>
