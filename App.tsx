@@ -5,10 +5,13 @@ import {
 } from "@expo-google-fonts/nunito-sans"
 import { StatusBar } from "react-native"
 import { ThemeProvider } from "styled-components/native"
+import { NavigationContainer } from "@react-navigation/native"
 
 import theme from "@/theme"
+
 import { Loading } from "@/components/Loading"
-import { Home } from "@/screens/Home"
+
+import { Routes } from "@/routes"
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -24,7 +27,7 @@ export default function App() {
         translucent
       />
 
-      {fontsLoaded ? <Home /> : <Loading />}
+      {fontsLoaded ? <Routes /> : <Loading />}
     </ThemeProvider>
   )
 }
