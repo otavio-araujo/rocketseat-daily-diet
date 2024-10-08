@@ -33,6 +33,7 @@ export const Content = styled.View`
 `
 
 export const FormContainer = styled.View`
+  flex: 1;
   width: 100%;
   gap: 24px;
 `

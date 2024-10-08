@@ -1,11 +1,14 @@
-import { SectionList } from "react-native"
+import { useEffect, useState } from "react"
+import { SectionList, View } from "react-native"
 import { useTheme } from "styled-components/native"
-import { useNavigation } from "@react-navigation/native"
+import { useIsFocused, useNavigation } from "@react-navigation/native"
 
 import ArrowUpRight from "phosphor-react-native/src/icons/ArrowUpRight"
 import Plus from "phosphor-react-native/src/icons/Plus"
+import MaterialIcons from "@expo/vector-icons/MaterialIcons"
 
 import { Section } from "@/@types/sectionList"
+import { MealSection, MealItem as Item } from "@/@types/meal"
 
 import { Header } from "@/components/Header"
 import { Button } from "@/components/Button"
@@ -15,10 +18,15 @@ import { CustomText } from "@/components/CustomText"
 
 import { Container } from "./styles"
 
+import { getAllMeals } from "@/storage/meal/mealGetAll"
+
 export function Home() {
   const navigation = useNavigation()
+  const isFocused = useIsFocused()
 
   const { COLORS } = useTheme()
+
+  const [mealList, setMealList] = useState<MealSection[]>([])
 
   const sections: Section[] = [
     {
@@ -85,6 +93,19 @@ export function Home() {
     navigation.navigate("mealDetails")
   }
 
+  async function fetchMeals() {
+    try {
+      const data = await getAllMeals()
+      setMealList(data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  useEffect(() => {
+    fetchMeals()
+  }, [isFocused])
+
   return (
     <Container>
       <Header />
@@ -114,7 +135,7 @@ export function Home() {
       />
 
       <SectionList
-        sections={sections}
+        sections={mealList}
         keyExtractor={(item, index) => item + index.toString()}
         renderItem={({ item }) => (
           <MealItem
@@ -135,6 +156,28 @@ export function Home() {
         )}
         contentContainerStyle={{ paddingBottom: 52 }}
         showsVerticalScrollIndicator={false}
+        ListEmptyComponent={
+          <View
+            style={{
+              flex: 1,
+              justifyContent: "center",
+              alignItems: "center",
+              padding: 24,
+              gap: 18,
+            }}
+          >
+            <MaterialIcons
+              name="no-meals-ouline"
+              size={36}
+              color={COLORS.GRAY_500}
+            />
+            <CustomText
+              text="Nenhuma refeição encontrada"
+              style={{ alignSelf: "center" }}
+              color="GRAY_300"
+            />
+          </View>
+        }
       />
     </Container>
   )

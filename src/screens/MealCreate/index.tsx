@@ -1,7 +1,8 @@
 import { useState } from "react"
 import { format } from "date-fns"
+import * as Crypto from "expo-crypto"
 import { ptBR } from "date-fns/locale"
-import { View } from "react-native"
+import { Alert, View } from "react-native"
 import { useTheme } from "styled-components/native"
 import { useNavigation, useRoute } from "@react-navigation/native"
 
@@ -22,6 +23,8 @@ import {
   ToggleContainer,
 } from "./styles"
 import { Button } from "@/components/Button"
+import { MealItem, MealSection } from "@/@types/meal"
+import { createMeal } from "@/storage/meal/mealCreate"
 
 type RouteParams = {
   isEditing: boolean
@@ -35,12 +38,11 @@ export function MealCreate() {
 
   const { COLORS } = useTheme()
 
+  const [meal, setMeal] = useState<string>("")
+  const [description, setDescription] = useState<string>("")
   const [isOnDiet, setIsOnDiet] = useState<boolean | null>(null)
   const [selectedDate, setSelectedDate] = useState(new Date())
   const [selectedTime, setSelectedTime] = useState(new Date())
-
-  const formattedDate = format(selectedDate, "dd/MM/yyyy", { locale: ptBR })
-  const formattedTime = format(selectedTime, "HH:mm", { locale: ptBR })
 
   const handleDateChange = (newDate: Date) => {
     setSelectedDate(newDate)
@@ -50,8 +52,39 @@ export function MealCreate() {
     setSelectedTime(newTime)
   }
 
-  function handleCreateMeal() {
-    navigation.navigate("mealFeedBack")
+  async function handleCreateMeal() {
+    if (meal.trim().length < 3) {
+      return Alert.alert(
+        "Nome da refeição",
+        "O nome da refeição deve conter pelo menos 3 letras"
+      )
+    }
+
+    if (description.trim().length < 10) {
+      return Alert.alert(
+        "Descrição da refeição",
+        "O descrição da refeição está um pouco curta. Dá uma caprichada!"
+      )
+    }
+    const formattedDate = format(selectedDate, "dd/MM/yyyy", { locale: ptBR })
+    const formattedTime = format(selectedTime, "HH:mm", { locale: ptBR })
+
+    const mealItem: MealItem = {
+      id: Crypto.randomUUID().toString(),
+      meal: meal || "",
+      time: formattedTime,
+      date: formattedDate,
+      description: description || "",
+      onDiet: isOnDiet || false,
+    }
+
+    try {
+      await createMeal(mealItem)
+      navigation.navigate("mealFeedBack")
+    } catch (error) {
+      Alert.alert("Refeição", "Houve um erro ao criar a refeição")
+      console.log(error)
+    }
   }
 
   return (
@@ -66,8 +99,21 @@ export function MealCreate() {
 
       <Content>
         <FormContainer>
-          <InputText label="Nome" />
-          <InputText isTextArea multiline numberOfLines={4} label="Descrição" />
+          <InputText
+            label="Nome"
+            value={meal}
+            onChangeText={setMeal}
+            autoCorrect={false}
+          />
+          <InputText
+            isTextArea
+            multiline
+            numberOfLines={4}
+            label="Descrição"
+            value={description}
+            onChangeText={setDescription}
+            autoCorrect={false}
+          />
 
           <DateContainer>
             <DateTimePicker
@@ -107,12 +153,13 @@ export function MealCreate() {
               />
             </ToggleContainer>
           </View>
+          <View style={{ flex: 1, justifyContent: "flex-end" }}>
+            <Button
+              text={isEditing ? "Salvar alterações" : "Criar refeição"}
+              onPress={handleCreateMeal}
+            />
+          </View>
         </FormContainer>
-        <Button
-          text={isEditing ? "Salvar alterações" : "Criar refeição"}
-          style={{ marginTop: "auto" }}
-          onPress={handleCreateMeal}
-        />
       </Content>
     </Container>
   )

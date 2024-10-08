@@ -1,4 +1,4 @@
-export type Item = {
+type MealItem = {
   id: string
   meal: string
   time: string
@@ -7,7 +7,9 @@ export type Item = {
   onDiet: boolean
 }
 
-export type Section = {
+type MealSection = {
   title: string
-  data: Item[]
+  data: MealItem[]
 }
+
+export { MealItem, MealSection }
