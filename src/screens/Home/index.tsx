@@ -1,7 +1,9 @@
 import { SectionList } from "react-native"
 import { useTheme } from "styled-components/native"
-import { ArrowUpRight, Plus } from "phosphor-react-native"
 import { useNavigation } from "@react-navigation/native"
+
+import ArrowUpRight from "phosphor-react-native/src/icons/ArrowUpRight"
+import Plus from "phosphor-react-native/src/icons/Plus"
 
 import { Section } from "@/@types/sectionList"
 

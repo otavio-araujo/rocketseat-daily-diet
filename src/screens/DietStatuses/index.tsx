@@ -1,8 +1,9 @@
 import { useState } from "react"
 import { View } from "react-native"
-import { ArrowLeft } from "phosphor-react-native"
 import { useTheme } from "styled-components/native"
 import { useNavigation } from "@react-navigation/native"
+
+import ArrowLeft from "phosphor-react-native/src/icons/ArrowLeft"
 
 import { CustomText } from "@/components/CustomText"
 import { Statistics } from "@/components/Statistics"

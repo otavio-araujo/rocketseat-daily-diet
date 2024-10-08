@@ -1,7 +1,10 @@
-import { Container, Dot } from "./styles"
-import { CustomText } from "../CustomText"
-import { ButtonType } from "@/@types/theme"
 import { TouchableOpacityProps } from "react-native"
+
+import { CustomText } from "@/components/CustomText"
+
+import { ButtonType } from "@/@types/theme"
+
+import { Container, Dot } from "./styles"
 
 type Props = TouchableOpacityProps & {
   label: string

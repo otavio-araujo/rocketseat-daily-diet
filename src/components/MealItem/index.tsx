@@ -1,3 +1,5 @@
+import { TouchableOpacityProps } from "react-native"
+
 import { CustomText } from "@/components/CustomText"
 
 import {
@@ -8,7 +10,6 @@ import {
 } from "./styles"
 
 import { Item } from "@/@types/sectionList"
-import { TouchableOpacityProps } from "react-native"
 
 type MealItemProps = Item & TouchableOpacityProps
 

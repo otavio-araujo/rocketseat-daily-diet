@@ -1,8 +1,8 @@
-import { ReactNode } from "react"
-import { Container, Dot } from "./styles"
-import { CustomText } from "@components/CustomText"
-import { ButtonType } from "@/@types/theme"
 import { ViewProps } from "react-native"
+
+import { CustomText } from "@components/CustomText"
+
+import { Container, Dot } from "./styles"
 
 type Props = ViewProps & {
   text: string

@@ -4,7 +4,6 @@ import { CustomText } from "@/components/CustomText"
 import { format } from "date-fns"
 import { ptBR } from "date-fns/locale"
 import { useState } from "react"
-import { Platform, Text } from "react-native"
 
 type Props = {
   label: string

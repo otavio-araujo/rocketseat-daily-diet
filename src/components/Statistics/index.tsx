@@ -1,12 +1,14 @@
 import { ReactNode } from "react"
+import { TouchableOpacityProps } from "react-native"
+
+import { CustomText } from "@components/CustomText"
+
 import {
   ButtonTypeStyleProps,
   Container,
   IconContainer,
   NumberSizeStyleProps,
 } from "./styles"
-import { CustomText } from "@components/CustomText"
-import { TouchableOpacityProps } from "react-native"
 
 type Props = TouchableOpacityProps & {
   number: string

@@ -1,8 +1,10 @@
 import { useState } from "react"
-import { View } from "react-native"
 import { useTheme } from "styled-components/native"
 import { useNavigation } from "@react-navigation/native"
-import { ArrowLeft, PencilSimpleLine, Trash } from "phosphor-react-native"
+
+import ArrowLeft from "phosphor-react-native/src/icons/ArrowLeft"
+import PencilSimpleLine from "phosphor-react-native/src/icons/PencilSimpleLine"
+import Trash from "phosphor-react-native/src/icons/Trash"
 
 import { Pill } from "@/components/Pill"
 import { Button } from "@/components/Button"

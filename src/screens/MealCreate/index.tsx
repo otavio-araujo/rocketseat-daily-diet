@@ -1,10 +1,11 @@
 import { useState } from "react"
 import { format } from "date-fns"
 import { ptBR } from "date-fns/locale"
-import { Text, View } from "react-native"
-import { ArrowLeft } from "phosphor-react-native"
+import { View } from "react-native"
 import { useTheme } from "styled-components/native"
 import { useNavigation, useRoute } from "@react-navigation/native"
+
+import ArrowLeft from "phosphor-react-native/src/icons/ArrowLeft"
 
 import { CustomText } from "@/components/CustomText"
 import { HeaderSimple } from "@/components/HeaderSimple"
