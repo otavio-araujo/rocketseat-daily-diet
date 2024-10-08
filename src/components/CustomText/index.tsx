@@ -4,7 +4,7 @@ import { Txt } from "./styles"
 import { TextInputProps } from "react-native"
 
 type Props = TextInputProps & {
-  text: string
+  text: string | undefined
   size?: TextSize
   color?: TextColor
   fontWeight?: TextWeight

@@ -6,7 +6,9 @@ export declare global {
       mealCreate: {
         isEditing: boolean
       }
-      mealDetails: undefined
+      mealDetails: {
+        mealID: string
+      }
       mealFeedBack: undefined
 
       dietStatuses: undefined

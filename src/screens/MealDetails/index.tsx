@@ -1,6 +1,8 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useTheme } from "styled-components/native"
-import { useNavigation } from "@react-navigation/native"
+import { useNavigation, useRoute } from "@react-navigation/native"
+
+import { getMealById } from "@/storage/meal/mealGetById"
 
 import ArrowLeft from "phosphor-react-native/src/icons/ArrowLeft"
 import PencilSimpleLine from "phosphor-react-native/src/icons/PencilSimpleLine"
@@ -13,10 +15,22 @@ import { CustomAlert } from "@/components/CustomAlert"
 import { HeaderSimple } from "@/components/HeaderSimple"
 
 import { Container, Content, HeaderContainer } from "./styles"
+import { MealItem } from "@/@types/meal"
+import { Alert } from "react-native"
+
+type RouteParams = {
+  mealID: string
+}
 
 export function MealDetails() {
   const navigation = useNavigation()
+
+  const route = useRoute()
+  const { mealID } = route.params as RouteParams
+
   const { COLORS } = useTheme()
+
+  const [meal, setMeal] = useState<MealItem>()
 
   const [isOnDiet, setIsOnDiet] = useState(false)
   const [showAlert, setAlertVisible] = useState(false)
@@ -31,9 +45,23 @@ export function MealDetails() {
     setAlertVisible(false)
   }
 
+  async function fetchMeal() {
+    try {
+      const mealData = await getMealById(mealID)
+      setMeal(mealData)
+    } catch (error) {
+      Alert.alert("Erro ao buscar refeição")
+      console.log(error)
+    }
+  }
+
   function handleDelete() {
     setAlertVisible(true)
   }
+
+  useEffect(() => {
+    fetchMeal()
+  }, [meal])
 
   function handleGoToEditMeal() {
     navigation.navigate("mealCreate", { isEditing: true })
@@ -49,9 +77,9 @@ export function MealDetails() {
         />
       </HeaderContainer>
       <Content>
-        <CustomText text="Sanduíche" size="XL" fontWeight="BOLD" />
+        <CustomText text={meal?.meal} size="XL" fontWeight="BOLD" />
         <CustomText
-          text="Sanduíche de pão integral com atum e salada de alface e tomate"
+          text={meal?.description}
           size="MD"
           style={{ marginTop: 8 }}
         />
@@ -62,13 +90,13 @@ export function MealDetails() {
           style={{ marginTop: 24 }}
         />
         <CustomText
-          text="12/08/2022 às 16:00"
+          text={`${meal?.date} às ${meal?.time}`}
           size="MD"
           style={{ marginTop: 8 }}
         />
         <Pill
-          isOnDiet={isOnDiet}
-          text={isOnDiet ? "dentro da dieta" : "fora da dieta"}
+          isOnDiet={meal?.onDiet}
+          text={meal?.onDiet ? "dentro da dieta" : "fora da dieta"}
           style={{ marginRight: "auto", marginTop: 24 }}
         />
         <Button

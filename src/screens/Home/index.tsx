@@ -7,8 +7,7 @@ import ArrowUpRight from "phosphor-react-native/src/icons/ArrowUpRight"
 import Plus from "phosphor-react-native/src/icons/Plus"
 import MaterialIcons from "@expo/vector-icons/MaterialIcons"
 
-import { Section } from "@/@types/sectionList"
-import { MealSection, MealItem as Item } from "@/@types/meal"
+import { MealSection } from "@/@types/meal"
 
 import { Header } from "@/components/Header"
 import { Button } from "@/components/Button"
@@ -27,59 +26,17 @@ export function Home() {
   const { COLORS } = useTheme()
 
   const [mealList, setMealList] = useState<MealSection[]>([])
+  const [averageOnDiet, setAverageOnDiet] = useState(0)
 
-  const sections: Section[] = [
-    {
-      title: "04.05.24",
-      data: [
-        {
-          id: "1",
-          time: "08:00",
-          meal: "X-Tudo",
-          onDiet: false,
-          date: "04.05.24",
-          description: "Hambúrguer completo com extras",
-        },
-        {
-          id: "2",
-          time: "12:00",
-          meal: "Lasanha",
-          onDiet: false,
-          date: "04.05.24",
-          description: "Lasanha à bolonhesa com queijo",
-        },
-      ],
-    },
-    {
-      title: "03.05.24",
-      data: [
-        {
-          id: "1",
-          time: "08:00",
-          meal: "X-Tudo",
-          onDiet: false,
-          date: "03.05.24",
-          description: "Hambúrguer completo com extras",
-        },
-        {
-          id: "2",
-          time: "12:00",
-          meal: "Lasanha",
-          onDiet: false,
-          date: "03.05.24",
-          description: "Lasanha à bolonhesa com queijo",
-        },
-        {
-          id: "3",
-          time: "18:00",
-          meal: "Salada",
-          onDiet: true,
-          date: "03.05.24",
-          description: "Salada verde com molho especial",
-        },
-      ],
-    },
-  ]
+  function averageOnDietMeals() {
+    const allMeals = mealList.flatMap((section) => section.data)
+    if (allMeals.length === 0) {
+      return "0.0"
+    }
+    const onDietItems = allMeals.filter((item) => item.onDiet === true)
+    const average = (onDietItems.length / allMeals.length) * 100
+    setAverageOnDiet(average)
+  }
 
   function handleDietStatuses() {
     navigation.navigate("dietStatuses")
@@ -89,8 +46,8 @@ export function Home() {
     navigation.navigate("mealCreate", { isEditing: false })
   }
 
-  function handleGoToMealDetails() {
-    navigation.navigate("mealDetails")
+  function handleGoToMealDetails(mealID: string) {
+    navigation.navigate("mealDetails", { mealID })
   }
 
   async function fetchMeals() {
@@ -103,6 +60,10 @@ export function Home() {
   }
 
   useEffect(() => {
+    averageOnDietMeals()
+  }, [mealList])
+
+  useEffect(() => {
     fetchMeals()
   }, [isFocused])
 
@@ -110,11 +71,16 @@ export function Home() {
     <Container>
       <Header />
       <Statistics
-        number="90.87%"
+        number={averageOnDiet.toFixed(2) + "%"}
         text="das refeições dentro da dieta"
-        type="PRIMARY"
+        type={averageOnDiet < 60 ? "SECONDARY" : "PRIMARY"}
         numberSize="XXL"
-        icon={<ArrowUpRight color={COLORS.GREEN_DARK} size={24} />}
+        icon={
+          <ArrowUpRight
+            color={averageOnDiet < 60 ? COLORS.RED_DARK : COLORS.GREEN_DARK}
+            size={24}
+          />
+        }
         style={{ marginTop: 32 }}
         onPress={handleDietStatuses}
       />
@@ -136,14 +102,16 @@ export function Home() {
 
       <SectionList
         sections={mealList}
-        keyExtractor={(item, index) => item + index.toString()}
+        keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
           <MealItem
+            id={item.id}
             time={item.time}
             date={item.date}
             meal={item.meal}
+            description={item.description}
             onDiet={item.onDiet}
-            onPress={handleGoToMealDetails}
+            onPress={() => handleGoToMealDetails(item.id)}
           />
         )}
         renderSectionHeader={({ section: { title } }) => (
