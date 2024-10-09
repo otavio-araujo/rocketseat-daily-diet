@@ -2,14 +2,18 @@ import styled, { css } from "styled-components/native"
 import { SafeAreaView } from "react-native-safe-area-context"
 
 type StatusesProps = {
-  isOnDiet: boolean
+  isOnDiet: boolean | "DEFAULT"
 }
 
 export const Container = styled(SafeAreaView)<StatusesProps>`
   flex: 1;
 
   background-color: ${({ theme, isOnDiet }) =>
-    isOnDiet ? theme.COLORS.GREEN_LIGHT : theme.COLORS.RED_LIGHT};
+    isOnDiet === "DEFAULT"
+      ? theme.COLORS.GRAY_600
+      : isOnDiet
+      ? theme.COLORS.GREEN_LIGHT
+      : theme.COLORS.RED_LIGHT};
 `
 
 export const HeaderContainer = styled.View`

@@ -1,8 +1,12 @@
+import { format } from "date-fns"
+import { Alert } from "react-native"
+import { ptBR } from "date-fns/locale"
 import { useEffect, useState } from "react"
 import { useTheme } from "styled-components/native"
 import { useNavigation, useRoute } from "@react-navigation/native"
 
 import { getMealById } from "@/storage/meal/mealGetById"
+import { deleteMealById } from "@/storage/meal/mealDeleteById"
 
 import ArrowLeft from "phosphor-react-native/src/icons/ArrowLeft"
 import PencilSimpleLine from "phosphor-react-native/src/icons/PencilSimpleLine"
@@ -14,12 +18,9 @@ import { CustomText } from "@/components/CustomText"
 import { CustomAlert } from "@/components/CustomAlert"
 import { HeaderSimple } from "@/components/HeaderSimple"
 
-import { Container, Content, HeaderContainer } from "./styles"
 import { MealItem } from "@/@types/meal"
-import { Alert } from "react-native"
-import { format } from "date-fns"
-import { ptBR } from "date-fns/locale"
-import { deleteMealById } from "@/storage/meal/mealDeleteById"
+
+import { Container, Content, HeaderContainer } from "./styles"
 
 type RouteParams = {
   mealID: string
