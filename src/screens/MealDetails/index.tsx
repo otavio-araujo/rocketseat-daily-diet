@@ -19,6 +19,7 @@ import { MealItem } from "@/@types/meal"
 import { Alert } from "react-native"
 import { format } from "date-fns"
 import { ptBR } from "date-fns/locale"
+import { deleteMealById } from "@/storage/meal/mealDeleteById"
 
 type RouteParams = {
   mealID: string
@@ -38,12 +39,16 @@ export function MealDetails() {
   const [showAlert, setAlertVisible] = useState(false)
 
   const handleConfirm = async () => {
+    try {
+      await deleteMealById(mealID)
+      navigation.navigate("home")
+    } catch (error) {
+      Alert.alert("Excluir refeição", "Erro ao excluir refeição")
+    }
     setAlertVisible(false)
-    navigation.navigate("home")
   }
 
   const handleCancel = () => {
-    // Handle the cancel action
     setAlertVisible(false)
   }
 
