@@ -83,6 +83,7 @@ export function MealDetails() {
     navigation.navigate("mealCreate", {
       isEditing: true,
       mealEditItem: mealEdit,
+      onDiet: meal?.onDiet || false,
     })
   }
 

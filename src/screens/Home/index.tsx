@@ -33,7 +33,8 @@ export function Home() {
   function averageOnDietMeals() {
     const allMeals = mealList.flatMap((section) => section.data)
     if (allMeals.length === 0) {
-      return "0.0"
+      setAverageOnDiet(0)
+      return
     }
     const onDietItems = allMeals.filter((item) => item.onDiet === true)
     const average = (onDietItems.length / allMeals.length) * 100
@@ -45,7 +46,7 @@ export function Home() {
   }
 
   function handleNewMeal() {
-    navigation.navigate("mealCreate", { isEditing: false })
+    navigation.navigate("mealCreate", { isEditing: false, onDiet: true })
   }
 
   function handleGoToMealDetails(mealID: string) {
@@ -63,11 +64,12 @@ export function Home() {
 
   useEffect(() => {
     averageOnDietMeals()
-  }, [mealList])
+  }, [mealList, averageOnDiet])
 
   useEffect(() => {
     fetchMeals()
-  }, [isFocused])
+    averageOnDietMeals()
+  }, [isFocused, averageOnDiet])
 
   return (
     <Container>
@@ -75,11 +77,23 @@ export function Home() {
       <Statistics
         number={averageOnDiet.toFixed(2) + "%"}
         text="das refeições dentro da dieta"
-        type={averageOnDiet < 60 ? "SECONDARY" : "PRIMARY"}
+        type={
+          averageOnDiet === 0 && mealList.length === 0
+            ? "DEFAULT"
+            : averageOnDiet < 60
+            ? "SECONDARY"
+            : "PRIMARY"
+        }
         numberSize="XXL"
         icon={
           <ArrowUpRight
-            color={averageOnDiet < 60 ? COLORS.RED_DARK : COLORS.GREEN_DARK}
+            color={
+              averageOnDiet === 0 && mealList.length === 0
+                ? COLORS.GRAY_200
+                : averageOnDiet < 60
+                ? COLORS.RED_DARK
+                : COLORS.GREEN_DARK
+            }
             size={24}
           />
         }

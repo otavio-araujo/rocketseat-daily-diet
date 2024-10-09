@@ -8,6 +8,7 @@ export declare global {
       mealCreate: {
         isEditing: boolean
         mealEditItem?: MealItem
+        onDiet: boolean
       }
       mealDetails: {
         mealID: string

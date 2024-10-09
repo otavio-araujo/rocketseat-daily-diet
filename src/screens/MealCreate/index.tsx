@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { format, toDate } from "date-fns"
 import * as Crypto from "expo-crypto"
 import { ptBR, enUS } from "date-fns/locale"
@@ -25,17 +25,19 @@ import {
 import { Button } from "@/components/Button"
 import { MealItem } from "@/@types/meal"
 import { createMeal } from "@/storage/meal/mealCreate"
+import { updateMeal } from "@/storage/meal/mealUpdate"
 
 type RouteParams = {
   isEditing: boolean
   mealEditItem?: MealItem
+  onDiet: boolean
 }
 
 export function MealCreate() {
   const navigation = useNavigation()
 
   const route = useRoute()
-  const { isEditing, mealEditItem } = route.params as RouteParams
+  const { isEditing, mealEditItem, onDiet } = route.params as RouteParams
 
   const { COLORS } = useTheme()
 
@@ -43,9 +45,7 @@ export function MealCreate() {
   const [description, setDescription] = useState<string>(
     mealEditItem?.description || ""
   )
-  const [isOnDiet, setIsOnDiet] = useState<boolean | null>(
-    mealEditItem?.onDiet || true
-  )
+  const [isOnDiet, setIsOnDiet] = useState<boolean>(onDiet || false)
   const [selectedDate, setSelectedDate] = useState(
     mealEditItem?.date || new Date()
   )
@@ -79,7 +79,9 @@ export function MealCreate() {
     // console.warn(new Date(selectedDate).toTimeString())
 
     const mealItem: MealItem = {
-      id: Crypto.randomUUID().toString(),
+      id: isEditing
+        ? mealEditItem?.id || Crypto.randomUUID()
+        : Crypto.randomUUID(),
       meal: meal || "",
       time: selectedTime,
       date: selectedDate,
@@ -89,7 +91,7 @@ export function MealCreate() {
 
     try {
       if (isEditing) {
-        // await createMeal(mealItem)
+        await updateMeal(mealItem)
         navigation.navigate("mealFeedBack", { isOnDiet: mealItem.onDiet })
         return
       }
@@ -165,6 +167,7 @@ export function MealCreate() {
                   isActive={isOnDiet === true}
                   onPress={() => setIsOnDiet(true)}
                 />
+
                 <ToggleButton
                   label="Não"
                   type="SECONDARY"
