@@ -1,16 +1,21 @@
 import { Image } from "react-native"
 import React, { useState } from "react"
-import { useNavigation } from "@react-navigation/native"
+import { useNavigation, useRoute } from "@react-navigation/native"
 
 import { CustomText } from "@/components/CustomText"
 
 import { BoldText, Container, Text } from "./styles"
 import { Button } from "@/components/Button"
 
+type RouteParams = {
+  isOnDiet: boolean
+}
+
 export function MealFeedback() {
   const navigation = useNavigation()
 
-  const [isOnDiet, setIsOnDiet] = useState(true)
+  const route = useRoute()
+  const { isOnDiet } = route.params as RouteParams
 
   const feedBackImage = isOnDiet
     ? require("@assets/images/positivefeedback.png")

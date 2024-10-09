@@ -12,7 +12,9 @@ export declare global {
       mealDetails: {
         mealID: string
       }
-      mealFeedBack: undefined
+      mealFeedBack: {
+        isOnDiet: boolean
+      }
 
       dietStatuses: undefined
     }

@@ -33,8 +33,8 @@ type RouteParams = {
 
 export function MealCreate() {
   const navigation = useNavigation()
-  const route = useRoute()
 
+  const route = useRoute()
   const { isEditing, mealEditItem } = route.params as RouteParams
 
   const { COLORS } = useTheme()
@@ -52,10 +52,6 @@ export function MealCreate() {
   const [selectedTime, setSelectedTime] = useState(
     mealEditItem?.time || new Date()
   )
-
-  // console.log(
-  //   format(mealEditItem?.date || new Date(), "dd/MM/yyyy", { locale: ptBR })
-  // )
 
   const handleDateChange = (newDate: Date) => {
     setSelectedDate(newDate)
@@ -85,8 +81,8 @@ export function MealCreate() {
     const mealItem: MealItem = {
       id: Crypto.randomUUID().toString(),
       meal: meal || "",
-      time: new Date(selectedTime),
-      date: new Date(selectedDate),
+      time: selectedTime,
+      date: selectedDate,
       description: description || "",
       onDiet: isOnDiet || false,
     }
@@ -94,12 +90,11 @@ export function MealCreate() {
     try {
       if (isEditing) {
         // await createMeal(mealItem)
-        // navigation.navigate("mealFeedBack")
+        navigation.navigate("mealFeedBack", { isOnDiet: mealItem.onDiet })
         return
       }
-      console.warn(mealItem.time)
-      // await createMeal(mealItem)
-      // navigation.navigate("mealFeedBack")
+      await createMeal(mealItem)
+      navigation.navigate("mealFeedBack", { isOnDiet: mealItem.onDiet })
     } catch (error) {
       Alert.alert("Refeição", "Houve um erro ao criar a refeição")
       console.log(error)
@@ -113,7 +108,9 @@ export function MealCreate() {
           <HeaderSimple
             title={isEditing ? "Editar refeição" : "Nova refeição"}
             icon={<ArrowLeft size={24} color={COLORS.GRAY_100} />}
-            onPress={() => navigation.navigate("home")}
+            onPress={() =>
+              isEditing ? navigation.goBack() : navigation.navigate("home")
+            }
           />
         </HeaderContainer>
 

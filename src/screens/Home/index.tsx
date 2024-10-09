@@ -109,7 +109,7 @@ export function Home() {
           <MealItem
             id={item.id}
             time={format(new Date(item.time), "HH:mm", { locale: ptBR })}
-            date={item.date}
+            date={format(new Date(item.date), "dd/MM/yyyy", { locale: ptBR })}
             meal={item.meal}
             description={item.description}
             onDiet={item.onDiet}

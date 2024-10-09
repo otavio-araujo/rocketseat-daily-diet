@@ -1,8 +1,8 @@
 type MealItem = {
   id: string
   meal: string
-  time: string
-  date: string
+  time: Date
+  date: Date
   description: string
   onDiet: boolean
 }

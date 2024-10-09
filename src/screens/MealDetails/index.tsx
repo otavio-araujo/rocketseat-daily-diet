@@ -69,8 +69,8 @@ export function MealDetails() {
     const mealEdit: MealItem = {
       id: meal?.id || "",
       meal: meal?.meal || "",
-      time: meal?.time || "",
-      date: meal?.date || "",
+      time: meal?.time || new Date(),
+      date: meal?.date || new Date(),
       description: meal?.description || "",
       onDiet: meal?.onDiet || false,
     }
@@ -104,7 +104,12 @@ export function MealDetails() {
           style={{ marginTop: 24 }}
         />
         <CustomText
-          text={`${meal?.date || ""} às ${meal?.time || ""}`}
+          text={`${format(meal?.date || new Date(), "dd/MM/yyyy", {
+            locale: ptBR,
+          })} às ${format(meal?.time || new Date(), "HH:mm", {
+            locale: ptBR,
+          })}`}
+          // text={`${meal?.date || ""} às ${meal?.time || ""}`}
           size="MD"
           style={{ marginTop: 8 }}
         />
