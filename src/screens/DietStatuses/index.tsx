@@ -30,33 +30,28 @@ export function DietStatuses() {
     setMealList(allMeals)
   }
 
-  async function averageOnDietMeals() {
-    const allMeals = await getAllMeals()
-    if (allMeals.length === 0) {
+  function averageOnDietMeals() {
+    if (mealList.length === 0) {
       setAverageOnDiet(0)
       return
     }
 
-    const onDietItems = allMeals
+    const onDietItems = mealList
       .flatMap((section) => section.data)
       .filter((item) => item.onDiet === true).length
 
-    const average = (onDietItems / allMeals.length) * 100
+    const average = (onDietItems / mealList.length) * 100
 
     setAverageOnDiet(average)
   }
 
-  async function getTotalMeals() {
-    const storage = await getAllMeals()
-
-    const totalMeals = storage.flatMap((section) => section.data).length
+  function getTotalMeals() {
+    const totalMeals = mealList.flatMap((section) => section.data).length
     setTotalMeals(totalMeals)
   }
 
-  async function getOnDietTotalMeals() {
-    const storage = await getAllMeals()
-
-    const mealsOnDiet = storage
+  function getOnDietTotalMeals() {
+    const mealsOnDiet = mealList
       .flatMap((section) => section.data)
       .filter((meal) => meal.onDiet === true).length
     setOnDietTotalMeals(mealsOnDiet)
@@ -66,24 +61,24 @@ export function DietStatuses() {
     const allItems = mealList.flatMap((section) => section.data)
     allItems.sort((a, b) => {
       // Combina data e hora em um único objeto Date e converte em timestamp
-      const dateTimeA = new Date(`${a.date}T${a.hour}`).getTime()
-      const dateTimeB = new Date(`${b.date}T${b.hour}`).getTime()
+      const dateTimeA = new Date(`${a.date}T${a.time}`).getTime()
+      const dateTimeB = new Date(`${b.date}T${b.time}`).getTime()
       return dateTimeA - dateTimeB
     })
 
-    let maxInDietSequence = 0
-    let currentInDietSequence = 0
+    let maxStreak = 0
+    let currentStreak = 0
 
     allItems.forEach((item) => {
-      if (item.inDiet) {
-        currentInDietSequence++
-        maxInDietSequence = Math.max(maxInDietSequence, currentInDietSequence)
+      if (item.onDiet) {
+        currentStreak++
+        maxStreak = Math.max(maxStreak, currentStreak)
       } else {
-        currentInDietSequence = 0 // Reset the sequence counter if the meal is out of diet
+        currentStreak = 0 // Reset the sequence counter if the meal is out of diet
       }
     })
 
-    return maxInDietSequence.toString() // Converting to string to match existing code style
+    return maxStreak.toString() // Converting to string to match existing code style
   }
 
   useEffect(() => {
@@ -91,7 +86,7 @@ export function DietStatuses() {
     getTotalMeals()
     getOnDietTotalMeals()
     averageOnDietMeals()
-  }, [])
+  }, [mealList])
 
   return (
     <Container
@@ -139,7 +134,7 @@ export function DietStatuses() {
         />
 
         <Statistics
-          number="22"
+          number={onDietTotalStreak()}
           text="melhor sequência de pratos dentro da dieta"
           type="DEFAULT"
           numberSize="XL"

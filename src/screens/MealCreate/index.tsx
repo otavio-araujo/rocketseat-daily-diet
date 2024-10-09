@@ -76,8 +76,6 @@ export function MealCreate() {
       )
     }
 
-    // console.warn(new Date(selectedDate).toTimeString())
-
     const mealItem: MealItem = {
       id: isEditing
         ? mealEditItem?.id || Crypto.randomUUID()
