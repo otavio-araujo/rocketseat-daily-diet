@@ -1,7 +1,7 @@
 import { useState } from "react"
-import { format } from "date-fns"
+import { format, toDate } from "date-fns"
 import * as Crypto from "expo-crypto"
-import { ptBR } from "date-fns/locale"
+import { ptBR, enUS } from "date-fns/locale"
 import { Alert, Keyboard, TouchableWithoutFeedback, View } from "react-native"
 import { useTheme } from "styled-components/native"
 import { useNavigation, useRoute } from "@react-navigation/native"
@@ -28,21 +28,34 @@ import { createMeal } from "@/storage/meal/mealCreate"
 
 type RouteParams = {
   isEditing: boolean
+  mealEditItem?: MealItem
 }
 
 export function MealCreate() {
   const navigation = useNavigation()
   const route = useRoute()
 
-  const { isEditing } = route.params as RouteParams
+  const { isEditing, mealEditItem } = route.params as RouteParams
 
   const { COLORS } = useTheme()
 
-  const [meal, setMeal] = useState<string>("")
-  const [description, setDescription] = useState<string>("")
-  const [isOnDiet, setIsOnDiet] = useState<boolean | null>(true)
-  const [selectedDate, setSelectedDate] = useState(new Date())
-  const [selectedTime, setSelectedTime] = useState(new Date())
+  const [meal, setMeal] = useState<string>(mealEditItem?.meal || "")
+  const [description, setDescription] = useState<string>(
+    mealEditItem?.description || ""
+  )
+  const [isOnDiet, setIsOnDiet] = useState<boolean | null>(
+    mealEditItem?.onDiet || true
+  )
+  const [selectedDate, setSelectedDate] = useState(
+    mealEditItem?.date || new Date()
+  )
+  const [selectedTime, setSelectedTime] = useState(
+    mealEditItem?.time || new Date()
+  )
+
+  // console.log(
+  //   format(mealEditItem?.date || new Date(), "dd/MM/yyyy", { locale: ptBR })
+  // )
 
   const handleDateChange = (newDate: Date) => {
     setSelectedDate(newDate)
@@ -66,21 +79,27 @@ export function MealCreate() {
         "O descrição da refeição está um pouco curta. Dá uma caprichada!"
       )
     }
-    const formattedDate = format(selectedDate, "dd/MM/yyyy", { locale: ptBR })
-    const formattedTime = format(selectedTime, "HH:mm", { locale: ptBR })
+
+    // console.warn(new Date(selectedDate).toTimeString())
 
     const mealItem: MealItem = {
       id: Crypto.randomUUID().toString(),
       meal: meal || "",
-      time: formattedTime,
-      date: formattedDate,
+      time: new Date(selectedTime),
+      date: new Date(selectedDate),
       description: description || "",
       onDiet: isOnDiet || false,
     }
 
     try {
-      await createMeal(mealItem)
-      navigation.navigate("mealFeedBack")
+      if (isEditing) {
+        // await createMeal(mealItem)
+        // navigation.navigate("mealFeedBack")
+        return
+      }
+      console.warn(mealItem.time)
+      // await createMeal(mealItem)
+      // navigation.navigate("mealFeedBack")
     } catch (error) {
       Alert.alert("Refeição", "Houve um erro ao criar a refeição")
       console.log(error)
@@ -123,13 +142,13 @@ export function MealCreate() {
               <DateTimePicker
                 pickerType="date"
                 label="Data"
-                date={selectedDate}
+                date={new Date(selectedDate)}
                 onDateChange={handleDateChange}
               />
               <DateTimePicker
                 pickerType="time"
                 label="Hora"
-                date={selectedTime}
+                date={new Date(selectedTime)}
                 onDateChange={handleTimeChange}
               />
             </DateContainer>

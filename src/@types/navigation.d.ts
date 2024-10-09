@@ -1,3 +1,5 @@
+import { MealItem } from "./meal"
+
 export declare global {
   namespace ReactNavigation {
     interface RootParamList {
@@ -5,6 +7,7 @@ export declare global {
 
       mealCreate: {
         isEditing: boolean
+        mealEditItem?: MealItem
       }
       mealDetails: {
         mealID: string

@@ -18,6 +18,8 @@ import { CustomText } from "@/components/CustomText"
 import { Container } from "./styles"
 
 import { getAllMeals } from "@/storage/meal/mealGetAll"
+import { ptBR } from "date-fns/locale"
+import { format } from "date-fns"
 
 export function Home() {
   const navigation = useNavigation()
@@ -106,7 +108,7 @@ export function Home() {
         renderItem={({ item }) => (
           <MealItem
             id={item.id}
-            time={item.time}
+            time={format(new Date(item.time), "HH:mm", { locale: ptBR })}
             date={item.date}
             meal={item.meal}
             description={item.description}
@@ -116,7 +118,7 @@ export function Home() {
         )}
         renderSectionHeader={({ section: { title } }) => (
           <CustomText
-            text={title}
+            text={format(new Date(title), "dd/MM/yyyy", { locale: ptBR })}
             fontWeight="BOLD"
             size="LG"
             style={{ marginBottom: 8, marginTop: 32 }}

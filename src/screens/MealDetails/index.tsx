@@ -17,6 +17,8 @@ import { HeaderSimple } from "@/components/HeaderSimple"
 import { Container, Content, HeaderContainer } from "./styles"
 import { MealItem } from "@/@types/meal"
 import { Alert } from "react-native"
+import { format } from "date-fns"
+import { ptBR } from "date-fns/locale"
 
 type RouteParams = {
   mealID: string
@@ -64,7 +66,19 @@ export function MealDetails() {
   }, [meal])
 
   function handleGoToEditMeal() {
-    navigation.navigate("mealCreate", { isEditing: true })
+    const mealEdit: MealItem = {
+      id: meal?.id || "",
+      meal: meal?.meal || "",
+      time: meal?.time || "",
+      date: meal?.date || "",
+      description: meal?.description || "",
+      onDiet: meal?.onDiet || false,
+    }
+
+    navigation.navigate("mealCreate", {
+      isEditing: true,
+      mealEditItem: mealEdit,
+    })
   }
 
   return (
@@ -90,7 +104,7 @@ export function MealDetails() {
           style={{ marginTop: 24 }}
         />
         <CustomText
-          text={`${meal?.date} às ${meal?.time}`}
+          text={`${meal?.date || ""} às ${meal?.time || ""}`}
           size="MD"
           style={{ marginTop: 8 }}
         />
